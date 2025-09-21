@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\PROYECTO_AUDICOB.props" />
+</Project>
