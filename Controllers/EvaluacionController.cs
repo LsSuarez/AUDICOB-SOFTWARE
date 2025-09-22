@@ -20,40 +20,42 @@ namespace AUDICOB_SOFTWARE.Controllers
         }
 
         // GET: /Evaluacion/Buscar
-      [HttpGet]
-public IActionResult Buscar()
-{
-    ViewData["HideNav"] = true; // bandera para ocultar menú
-    return View(new BuscarClienteViewModel());
-}
+        [HttpGet]
+        public IActionResult Buscar()
+        {
+            ViewData["HideNav"] = true; // Oculta menú en GET
+            return View(new BuscarClienteViewModel());
+        }
 
         // POST: /Evaluacion/Buscar
-       [HttpPost]
-public IActionResult Buscar(BuscarClienteViewModel model)
-{
-    var cliente = _context.Clientes
-        .Include(c => c.Evaluaciones)
-        .FirstOrDefault(c => c.Dni == model.Dni);
+        [HttpPost]
+        public IActionResult Buscar(BuscarClienteViewModel model)
+        {
+            // IMPORTANTE: ponerlo también aquí
+            ViewData["HideNav"] = true; // Oculta menú en POST
 
-    if (cliente != null)
-    {
-        // Limpiar errores previos
-        ModelState.Clear();
+            var cliente = _context.Clientes
+                .Include(c => c.Evaluaciones)
+                .FirstOrDefault(c => c.Dni == model.Dni);
 
-        model.NombreCliente = cliente.Nombre;
-        model.Telefono = cliente.Telefono;
-        model.Evaluaciones = cliente.Evaluaciones
-            .OrderByDescending(e => e.FechaRegistro)
-            .ToList();
-    }
-    else
-    {
-        model.Evaluaciones = new List<Evaluacion>();
-        ModelState.AddModelError("", "Cliente no encontrado");
-    }
+            if (cliente != null)
+            {
+                // Limpiar errores previos
+                ModelState.Clear();
 
-    return View(model);
-}
+                model.NombreCliente = cliente.Nombre;
+                model.Telefono = cliente.Telefono;
+                model.Evaluaciones = cliente.Evaluaciones
+                    .OrderByDescending(e => e.FechaRegistro)
+                    .ToList();
+            }
+            else
+            {
+                model.Evaluaciones = new List<Evaluacion>();
+                ModelState.AddModelError("", "Cliente no encontrado");
+            }
 
+            return View(model);
+        }
     }
 }
