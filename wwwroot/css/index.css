@@ -1,0 +1,64 @@
+/* wwwroot/css/index.css */
+
+/* Fondo suave */
+body {
+    background-color: #f5faff; /* celeste muy claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.titulo-listado {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e3a8a; /* azul fuerte */
+}
+
+/* Botón principal */
+.btn-primary {
+    background-color: #1e3a8a; /* azul fuerte */
+    border-color: #1e3a8a;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb; /* azul más claro */
+    border-color: #2563eb;
+}
+
+/* Tabla */
+.listado-tabla {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.listado-tabla thead tr {
+    background-color: #2563eb; /* azul */
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.listado-tabla td,
+.listado-tabla th {
+    vertical-align: middle;
+    text-align: center;
+    padding: 12px;
+}
+
+.listado-tabla tbody tr:hover {
+    background-color: #e0f2fe; /* celeste claro al pasar el mouse */
+}
+
+/* Ajustar historial pagos */
+.historial {
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+/* Párrafo cuando no hay datos */
+.text-muted {
+    font-size: 1.2rem;
+}

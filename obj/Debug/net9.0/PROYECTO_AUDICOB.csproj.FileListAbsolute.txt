@@ -589,3 +589,6 @@ C:\Users\abel_\Downloads\audicoboriginal\AUDICOB-SOFTWARE\obj\Debug\net9.0\refin
 C:\Users\abel_\Downloads\audicoboriginal\AUDICOB-SOFTWARE\obj\Debug\net9.0\PROYECTO_AUDICOB.pdb
 C:\Users\abel_\Downloads\audicoboriginal\AUDICOB-SOFTWARE\obj\Debug\net9.0\PROYECTO_AUDICOB.genruntimeconfig.cache
 C:\Users\abel_\Downloads\audicoboriginal\AUDICOB-SOFTWARE\obj\Debug\net9.0\ref\PROYECTO_AUDICOB.dll
+C:\Users\abel_\Downloads\audicoboriginal\AUDICOB-SOFTWARE\obj\Debug\net9.0\compressed\f765yej7z5-96qjeb1hrr.gz
+C:\Users\abel_\Downloads\audicoboriginal\AUDICOB-SOFTWARE\obj\Debug\net9.0\compressed\4tmn3rufhg-s5ftnz42li.gz
+C:\Users\abel_\Downloads\audicoboriginal\AUDICOB-SOFTWARE\obj\Debug\net9.0\compressed\vuvq5q72se-vd917e8vxm.gz

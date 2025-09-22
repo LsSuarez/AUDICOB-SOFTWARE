@@ -1,52 +1,68 @@
-@model IEnumerable<PROYECTO_AUDICOB.Models.Evaluacion>
-
 @{
+    Layout = null; // desactivar layout
     ViewData["Title"] = "Listado de Evaluaciones";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/index.css" />  @* tu css personalizado *@
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="text-center mb-4">
+            <h2 class="titulo-listado">@ViewData["Title"]</h2>
+            <a asp-action="Buscar" class="btn btn-primary btn-lg mt-3">Buscar Cliente por DNI</a>
+        </div>
 
-<h2>Listado de Evaluaciones</h2>
-
-<p>
-    <a asp-action="Buscar" class="btn btn-primary">Buscar Cliente por DNI</a>
-</p>
-
-@if (Model != null && Model.Any())
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Cliente</th>
-                <th>DNI</th>
-                <th>Ingresos</th>
-                <th>Deudas</th>
-                <th>Estado</th>
-                <th>Comentario</th>
-                <th>Usuario Responsable</th>
-                <th>Historial Pagos</th>
-                <th>Fecha Registro</th>
-                <th>Fecha Revisión</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var eval in Model)
+        @if (Model != null && Model.Any())
         {
-            <tr>
-                <td>@eval.Cliente?.Nombre</td>
-                <td>@eval.Cliente?.Dni</td>
-                <td>@eval.Ingresos</td>
-                <td>@eval.Deudas</td>
-                <td>@eval.Estado</td>
-                <td>@eval.Comentario</td>
-                <td>@eval.UsuarioResponsableId</td>
-                <td>@eval.HistorialPagosJson</td>
-                <td>@eval.FechaRegistro.ToShortDateString()</td>
-                <td>@(eval.FechaRevision.HasValue ? eval.FechaRevision.Value.ToShortDateString() : "-")</td>
-            </tr>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered listado-tabla">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>DNI</th>
+                            <th>Ingresos</th>
+                            <th>Deudas</th>
+                            <th>Estado</th>
+                            <th>Comentario</th>
+                            <th>Usuario Responsable</th>
+                            <th>Historial Pagos</th>
+                            <th>Fecha Registro</th>
+                            <th>Fecha Revisión</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var eval in Model)
+                    {
+                        <tr>
+                            <td>@eval.Cliente?.Nombre</td>
+                            <td>@eval.Cliente?.Dni</td>
+                            <td>@eval.Ingresos</td>
+                            <td>@eval.Deudas</td>
+                            <td>@eval.Estado</td>
+                            <td>@eval.Comentario</td>
+                            <td>@eval.UsuarioResponsableId</td>
+                            <td class="historial">@eval.HistorialPagosJson</td>
+                            <td>@eval.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                            <td>@(eval.FechaRevision.HasValue ? eval.FechaRevision.Value.ToString("dd/MM/yyyy") : "-")</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No hay evaluaciones registradas.</p>
-}
+        else
+        {
+            <p class="text-center text-muted mt-4">No hay evaluaciones registradas.</p>
+        }
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

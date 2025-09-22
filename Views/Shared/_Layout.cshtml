@@ -8,7 +8,21 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PROYECTO_AUDICOB.styles.css" asp-append-version="true" />
+
+    @* 👇 ESTA LÍNEA HACE QUE TOME LOS CSS DE LAS VISTAS 👇 *@
+    @RenderSection("Styles", required: false)
 </head>
+<style>
+body {
+    background-color: lightblue !important;
+}
+h1 {
+    color: darkblue !important;
+}
+</style>
+
+
+
 <body>
     @* Menú solo si no pedimos ocultarlo *@
     @if (ViewData["HideNav"] == null)
@@ -29,11 +43,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
+                          
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Evaluacion" asp-action="Index">Evaluaciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Evaluacion" asp-action="Buscar">Buscar Cliente</a>
+                                <a class="nav-link text-dark" asp-controller="Evaluacion" asp-action="Buscar">Evaluar situacion financiera</a>
                             </li>
                         </ul>
                         <partial name="_LoginPartial" />
