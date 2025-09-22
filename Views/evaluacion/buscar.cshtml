@@ -1,0 +1,87 @@
+@model PROYECTO_AUDICOB.ViewModels.BuscarClienteViewModel
+
+@{
+    ViewData["Title"] = "Buscar Cliente";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center text-primary mb-4">@ViewData["Title"]</h2>
+
+            <!-- Formulario de búsqueda -->
+            <form asp-action="Buscar" method="post" class="mb-4">
+                <div class="input-group">
+                    <input asp-for="Dni" class="form-control" placeholder="Ingrese código del cliente" />
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </div>
+                <span asp-validation-for="Dni" class="text-danger"></span>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resultados: solo si hay datos -->
+    @if (!string.IsNullOrEmpty(Model.NombreCliente))
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Datos del Cliente
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Nombre:</strong> @Model.NombreCliente</p>
+                        <p><strong>Teléfono:</strong> @Model.Telefono</p>
+                    </div>
+                </div>
+
+                <h4 class="text-center text-primary mb-3">Evaluaciones</h4>
+
+                @if (Model.Evaluaciones != null && Model.Evaluaciones.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover text-center shadow-sm align-middle">
+                            <thead class="table-primary">
+                                <tr>
+                                    <th>Ingresos</th>
+                                    <th>Deudas</th>
+                                    <th>Estado</th>
+                                    <th>Comentario</th>
+                                    <th>Usuario Responsable</th>
+                                    <th>Historial Pagos</th>
+                                    <th>Fecha Registro</th>
+                                    <th>Fecha Revisión</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var eval in Model.Evaluaciones)
+                                {
+                                    <tr>
+                                        <td>@eval.Ingresos</td>
+                                        <td>@eval.Deudas</td>
+                                        <td>@eval.Estado</td>
+                                        <td>@eval.Comentario</td>
+                                        <td>@eval.UsuarioResponsableId</td>
+                                        <td style="max-width:200px; word-wrap:break-word;">@eval.HistorialPagosJson</td>
+                                        <td>@eval.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                                        <td>@(eval.FechaRevision.HasValue ? eval.FechaRevision.Value.ToString("dd/MM/yyyy") : "-")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-center text-muted">No se encontraron evaluaciones para este cliente.</p>
+                }
+            </div>
+        </div>
+    }
+
+    <!-- Mensaje de error si no se encuentra cliente -->
+    @if (!ViewData.ModelState.IsValid || (Model.Dni != null && string.IsNullOrEmpty(Model.NombreCliente)))
+    {
+        <p class="text-center text-danger mt-3">Cliente no encontrado.</p>
+    }
+</div>

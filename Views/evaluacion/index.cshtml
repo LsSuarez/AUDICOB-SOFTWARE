@@ -1,0 +1,52 @@
+@model IEnumerable<PROYECTO_AUDICOB.Models.Evaluacion>
+
+@{
+    ViewData["Title"] = "Listado de Evaluaciones";
+}
+
+<h2>Listado de Evaluaciones</h2>
+
+<p>
+    <a asp-action="Buscar" class="btn btn-primary">Buscar Cliente por DNI</a>
+</p>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>DNI</th>
+                <th>Ingresos</th>
+                <th>Deudas</th>
+                <th>Estado</th>
+                <th>Comentario</th>
+                <th>Usuario Responsable</th>
+                <th>Historial Pagos</th>
+                <th>Fecha Registro</th>
+                <th>Fecha Revisión</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var eval in Model)
+        {
+            <tr>
+                <td>@eval.Cliente?.Nombre</td>
+                <td>@eval.Cliente?.Dni</td>
+                <td>@eval.Ingresos</td>
+                <td>@eval.Deudas</td>
+                <td>@eval.Estado</td>
+                <td>@eval.Comentario</td>
+                <td>@eval.UsuarioResponsableId</td>
+                <td>@eval.HistorialPagosJson</td>
+                <td>@eval.FechaRegistro.ToShortDateString()</td>
+                <td>@(eval.FechaRevision.HasValue ? eval.FechaRevision.Value.ToShortDateString() : "-")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No hay evaluaciones registradas.</p>
+}
